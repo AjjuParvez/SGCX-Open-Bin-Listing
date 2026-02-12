@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Bin Availability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <h1>Open Bin Availability</h1>
+  </div>
+  <div class="legend">
+    <span class="pill available">Available</span>
+    <span class="pill low">Low Stock</span>
+    <span class="pill no">No Stock</span>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="filters">
+  <div class="filter">
+    <label>Search</label>
+    <input id="q" placeholder="Search material / desc / long text…" />
+  </div>
+
+  <div class="filter">
+    <label>Site</label>
+    <select id="site"><option value="">All</option></select>
+  </div>
+
+  <div class="filter">
+    <label>Category</label>
+    <select id="category"><option value="">All</option></select>
+  </div>
+
+  <div class="filter">
+    <label>Status</label>
+    <select id="status">
+      <option value="">All</option>
+      <option>Available</option>
+      <option>Low Stock</option>
+      <option>No Stock</option>
+    </select>
+  </div>
+</section>
+
+<section class="summary">
+  <h2 class="summary-title">Available % by Plant</h2>
+  <div id="summaryByPlant" class="summary-list"></div>
+</section>
+
+<div class="meta">
+  <span id="count">0 items</span>
+  <div class="pager">
+    <button id="prev">◀</button>
+    <span id="page">1 / 1</span>
+    <button id="next">▶</button>
+  </div>
+</div>
+
+<section class="table-wrap">
+  <table id="grid">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Material No.</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Long text</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+</main>
+
+<footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
+<script src="app.js"></script>
+</body>
+</html>
