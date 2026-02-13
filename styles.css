@@ -1,260 +1,147 @@
 :root{
   --sap-blue:#0A6ED1;
   --sap-blue-2:#0854A0;
-  --bg:#f6f7f9;
   --card:#ffffff;
   --text:#0f172a;
-  --muted:#6b7280;
-  --ok:#10b981;     /* green */
-  --warn:#f59e0b;   /* orange */
-  --bad:#ef4444;    /* red */
+  --ok:#10b981;
+  --warn:#f59e0b;
+  --bad:#ef4444;
 }
 
-/* Base ------------------------------------------------*/
+/* RESET */
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
 body{
   margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  background:linear-gradient(180deg,#eef3f9,#f8fafc);
+  font-family:Inter,system-ui;
+  background:#eef3f9;
   color:var(--text);
 }
 
-/* Subtle warehouse pattern ---------------------------*/
-body::before{
-  content:"";
-  position:fixed; inset:0; z-index:-1; opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cg fill='none' stroke='%230854A0' stroke-width='1'%3E%3Crect x='10' y='10' width='60' height='30' rx='4'/%3E%3Crect x='90' y='20' width='80' height='40' rx='6'/%3E%3Cpath d='M10 80h180 M30 120h140 M60 160h80'/%3E%3Ccircle cx='50' cy='150' r='6'/%3E%3Ccircle cx='150' cy='150' r='6'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* Header ----------------------------------------------*/
+/* HEADER */
 .app-header{
   background:linear-gradient(90deg,var(--sap-blue),var(--sap-blue-2));
-  color:#fff; padding:14px 18px;
-  display:flex; justify-content:space-between; align-items:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  color:#fff;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
 }
-.brand{ display:flex; gap:10px; align-items:center; }
-.brand-dot{ width:10px; height:10px; background:#fff; border-radius:50%; box-shadow:0 0 0 4px rgba(255,255,255,.35); }
-.update-info{ display:flex; flex-direction:column; text-align:right; font-size:12px; color:#e2e8f0; }
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand-dot{ width:12px;height:12px;background:#fff;border-radius:50%; }
 
-/* Layout ----------------------------------------------*/
-.container{ max-width:1200px; margin:16px auto; padding:0 16px; }
-
-/* Utility bar ----------------------------------------*/
-.utility{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.utility-left{ flex:1; }
-.utility-right{ flex:0; }
-.search{
-  width:100%; height:42px; padding:0 12px;
-  border:1px solid #dbe1ea; border-radius:10px; background:#fff;
+/* TOP RIGHT SUMMARY */
+.top-summary{
+  text-align:right;
+  min-width:260px;
 }
-.search-btn{
-  height:42px; padding:0 16px; border-radius:10px;
-  border:1px solid #0f172a22; background:#0f172a; color:#fff; font-weight:700;
-  box-shadow:0 2px 6px rgba(0,0,0,.15);
+.top-summary h2{
+  margin:0 0 8px;
+  font-size:15px;
+  font-weight:700;
 }
 
-/* Content grid: left main + right sidebar ------------*/
-.content-grid{
-  display:grid; grid-template-columns:1fr 360px; gap:16px; align-items:start;
+/* STACKED BARS */
+.stack-list{ display:flex; flex-direction:column; gap:10px; }
+.stack-row{
+  display:grid;
+  grid-template-columns:60px 1fr 50px;
+  gap:10px;
+  align-items:center;
 }
-
-/* Left main ------------------------------------------*/
-.main-card{
-  background:var(--card);
-  border:1px solid #e5e7eb; border-radius:12px;
-  box-shadow:0 4px 10px rgba(10,110,209,.05);
-  padding:12px;
-}
-.meta{ display:flex; justify-content:space-between; align-items:center; margin:6px 0 10px; color:#475569; }
-.pager button{ width:34px; height:34px; border-radius:8px; border:1px solid #cbd5e1; background:#fff; }
-
-/* Table ----------------------------------------------*/
-.table-wrap{ border:1px solid #e2e8f0; border-radius:10px; overflow:auto; }
-#grid{ width:100%; border-collapse:separate; border-spacing:0; table-layout:auto; }
-#grid thead th{
-  background:#f1f5f9; position:sticky; top:0; z-index:1;
-  padding:10px; font-size:13px; font-weight:700; color:#334155; border-bottom:1px solid #e2e8f0;
-}
-#grid tbody td{ padding:10px; font-size:13px; color:var(--text); border-bottom:1px solid #f8fafc; }
-
-/* Long text — always visible & wrapped */
-#grid td, #grid th{ white-space:pre-wrap !important; word-break:break-word !important; }
-#grid thead th:nth-child(5), #grid tbody td:nth-child(5){ min-width:720px !important; max-width:none !important; }
-td[data-col="Long text"]{ line-height:1.35; }
-
-/* Status chips ---------------------------------------*/
-.status{ padding:4px 10px; border-radius:999px; font-weight:700; display:inline-block; }
-.status.Available{ color:var(--ok);  background:rgba(16,185,129,.12); }
-.status.LowStock{  color:var(--warn); background:rgba(245,158,11,.12); }
-.status.NoStock{   color:var(--bad);  background:rgba(239,68,68,.12); }
-
-/* Right sidebar (stacked bars) -----------------------*/
-.sidebar{ position:sticky; top:86px; }
-.stack-card{
-  background:var(--card); border:1px solid #e5e7eb; border-radius:12px;
-  box-shadow:0 4px 10px rgba(10,110,209,.05);
-  padding:12px;
-}
-.stack-title-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
-.stack-title{ margin:0; font-size:15px; font-weight:700; color:#0f172a; }
-.stack-legend{ display:flex; gap:8px; font-size:12px; color:#334155; }
-.leg{ display:inline-flex; align-items:center; gap:6px; }
-.leg::before{ content:""; width:10px; height:10px; border-radius:2px; display:inline-block; }
-.leg-a::before{ background:var(--ok); }
-.leg-l::before{ background:var(--warn); }
-.leg-n::before{ background:var(--bad); }
-
-.stack-list{ display:grid; gap:12px; }
-.stack-row{ display:grid; grid-template-columns:64px 1fr 50px; gap:10px; align-items:center; }
-.stack-plant{ font-weight:700; color:#334155; text-align:right; }
+.stack-plant{text-align:right;font-weight:700;}
 .stack-bar{
-  height:14px; border-radius:999px; overflow:hidden; display:flex; border:1px solid #e2e8f0; background:#f8fafc;
+  height:14px;
+  display:flex;
+  border-radius:10px;
+  overflow:hidden;
+  background:#e5e7eb;
+  border:1px solid #ccc;
 }
 .seg{ height:100%; }
-.seg-a{ background:rgba(16,185,129,.95); }
-.seg-l{ background:rgba(245,158,11,.95); }
-.seg-n{ background:rgba(239,68,68,.95); }
-.stack-pct{ text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
+.seg-a{ background:#10b981; }
+.seg-l{ background:#f59e0b; }
+.seg-n{ background:#ef4444; }
+.stack-pct{text-align:right;font-weight:700;}
 
-/* Footer ---------------------------------------------*/
-.app-footer{ text-align:center; color:#64748b; font-size:12px; padding:18px 0 30px; }
-
-/* Responsive -----------------------------------------*/
-@media (max-width: 1040px){
-  .content-grid{ grid-template-columns:1fr; }
-  .sidebar{ position:static; }
+/* UTILITY BAR */
+.utility{
+  max-width:1200px;
+  margin:20px auto 0;
+  padding:0 20px;
+  display:flex;
+  justify-content:space-between;
 }
-@media (max-width: 520px){
-  #grid thead{ display:none; }
-  #grid tbody td{ display:block; }
-  #grid tbody td::before{
-    content:attr(data-col) ": ";
-    font-weight:700; color:#475569;
-  }
-  /* Long text still readable on mobile */
-  #grid thead th:nth-child(5), #grid tbody td:nth-child(5){ min-width:unset !important; }
+.search{
+  width:100%;
+  height:42px;
+  padding:0 12px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
 }
-/* --- TABLE FIX: keep headers on one line; wrap only cell content --- */
-#grid th {
-  white-space: nowrap !important;   /* prevent vertical letters in header */
-  word-break: normal !important;
-}
-
-/* Wrap content in cells only (not headers) */
-#grid td {
-  white-space: pre-wrap !important; /* show multi-line long text */
-  word-break: break-word !important;
+.search-btn{
+  height:42px;
+  padding:0 16px;
+  background:#111827;
+  color:#fff;
+  border-radius:8px;
+  font-weight:600;
 }
 
-/* Give sensible min-widths so columns don't collapse */
-#grid { table-layout: auto; }
-#grid thead th:nth-child(1), #grid tbody td:nth-child(1) { min-width: 72px; }   /* Site */
-#grid thead th:nth-child(2), #grid tbody td:nth-child(2) { min-width: 120px; }  /* Material No. */
-#grid thead th:nth-child(3), #grid tbody td:nth-child(3) { min-width: 140px; }  /* Category */
-#grid thead th:nth-child(4), #grid tbody td:nth-child(4) { min-width: 280px; }  /* Description */
-#grid thead th:nth-child(5), #grid tbody td:nth-child(5) { 
-  min-width: 720px;                 /* Long text wide */
-  max-width: none !important;
+/* CONTENT GRID */
+.container{
+  max-width:1200px;
+  margin:0 auto;
 }
-#grid thead th:nth-child(6), #grid tbody td:nth-child(6) { min-width: 110px; }  /* Status */
-
-/* Ensure horizontal scroll is allowed if width exceeds container */
-.table-wrap { overflow-x: auto; }
-
-/* Make sure Long text is never clamped/hidden */
-td[data-col="Long text"]{
-  -webkit-line-clamp: unset !important;
-  display: block !important;
-  overflow: visible !important;
-  line-height: 1.35;
-}
-/* ===============================
-   EXCEL-TABLE THEME + FIXES
-   =============================== */
-
-/* 1) Keep headers on one line; wrap only body cells */
-#grid th {
-  white-space: nowrap !important;     /* stop header letters from stacking */
-  word-break: normal !important;
-  text-align: left;
-  font-weight: 700;
+.content-grid{
+  display:block;
 }
 
-/* 2) Body cells wrap nicely (Long text shows fully) */
-#grid td {
-  white-space: pre-wrap !important;   /* preserve newlines & wrap */
-  word-break: break-word !important;  /* break long tokens */
-  vertical-align: top;                /* Excel-like top alignment */
-  line-height: 1.35;
+/* EXCEL TABLE STYLING */
+.table-wrap{
+  margin-top:20px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  overflow-x:auto;
+  background:white;
+}
+#grid{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+}
+#grid th{
+  background:#d9d9d9;
+  padding:10px;
+  border-bottom:1px solid #c0c0c0;
+  white-space:nowrap !important;
+}
+#grid td{
+  padding:8px;
+  border-bottom:1px solid #e5e5e5;
+  white-space:pre-wrap !important;
+  word-break:break-word !important;
 }
 
-/* 3) Excel gridlines + header style */
-.table-wrap { overflow-x: auto; }     /* enable horizontal scroll when needed */
-#grid {
-  table-layout: auto;                 /* allow column widths */
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #fff;
-  font-family: Calibri, "Segoe UI", Inter, system-ui, sans-serif; /* Excel vibe */
-}
-#grid thead th {
-  background: #d9d9d9;                /* Excel header grey */
-  color: #111827;
-  border-bottom: 1px solid #bfbfbf;
-  border-right: 1px solid #bfbfbf;
-  padding: 8px 10px;
-}
-#grid thead th:first-child { border-left: 1px solid #bfbfbf; }
+/* FIX COLUMN WIDTHS */
+#grid th:nth-child(1), #grid td:nth-child(1){ min-width:80px; }
+#grid th:nth-child(2), #grid td:nth-child(2){ min-width:150px; }
+#grid th:nth-child(3), #grid td:nth-child(3){ min-width:140px; }
+#grid th:nth-child(4), #grid td:nth-child(4){ min-width:280px; }
+#grid th:nth-child(5), #grid td:nth-child(5){ min-width:800px; max-width:none; }
+#grid th:nth-child(6), #grid td:nth-child(6){ min-width:120px; }
 
-#grid tbody td {
-  border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 6px 10px;                  /* denser like Excel rows */
+/* STATUS BADGES */
+.status{
+  padding:4px 10px;
+  border-radius:10px;
+  font-weight:700;
 }
-#grid tbody tr:nth-child(even) td {
-  background: #f3f3f3;                /* alternating fill */
-}
-#grid tbody tr:hover td {
-  background: #eef6ff;                /* light hover highlight */
-}
+.status.Available{ background:#bbf7d0; color:#065f46; }
+.status.LowStock{ background:#fed7aa; color:#92400e;}
+.status.NoStock{ background:#fecaca; color:#7f1d1d; }
 
-/* 4) Column widths (adjust to your taste) */
-#grid thead th:nth-child(1), #grid tbody td:nth-child(1) { min-width: 90px; }   /* Site */
-#grid thead th:nth-child(2), #grid tbody td:nth-child(2) { min-width: 140px; }  /* Material No. */
-#grid thead th:nth-child(3), #grid tbody td:nth-child(3) { min-width: 150px; }  /* Category */
-#grid thead th:nth-child(4), #grid tbody td:nth-child(4) { min-width: 280px; }  /* Description */
-#grid thead th:nth-child(5), #grid tbody td:nth-child(5) { 
-  min-width: 900px;                   /* WIDE Long text column */
-  max-width: none !important;
+.app-footer{
+  text-align:center;
+  padding:20px;
+  color:#6b7280;
 }
-#grid thead th:nth-child(6), #grid tbody td:nth-child(6) { min-width: 120px; }  /* Status */
-
-/* 5) Status chips close to Excel look (keep your colors) */
-.status {
-  display:inline-block;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 12px;
-}
-.status.Available { color:#065f46; background:#bbf7d0; } /* green pastel */
-.status.LowStock  { color:#7c2d12; background:#fed7aa; } /* orange pastel */
-.status.NoStock   { color:#7f1d1d; background:#fecaca; } /* red pastel */
-
-/* 6) FORCE table layout on small screens (no cards) */
-@media (max-width: 520px){
-  #grid thead { display: table-header-group !important; }
-  #grid tbody td { display: table-cell !important; }
-  #grid tbody td::before { content: none !important; }
-}
-
-/* 7) Sidebar width (optional fine-tune) */
-.content-grid { grid-template-columns: 1fr 360px; }   /* left table, right stacked bars */
-.sidebar { position: sticky; top: 86px; }
-
-/* 8) Utility bar polish */
-.utility { margin-top: 10px; }
-.search { height: 42px; }
-.search-btn { height: 42px; }
