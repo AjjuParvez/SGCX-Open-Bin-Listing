@@ -136,3 +136,37 @@ td[data-col="Long text"]{ line-height:1.35; }
   /* Long text still readable on mobile */
   #grid thead th:nth-child(5), #grid tbody td:nth-child(5){ min-width:unset !important; }
 }
+/* --- TABLE FIX: keep headers on one line; wrap only cell content --- */
+#grid th {
+  white-space: nowrap !important;   /* prevent vertical letters in header */
+  word-break: normal !important;
+}
+
+/* Wrap content in cells only (not headers) */
+#grid td {
+  white-space: pre-wrap !important; /* show multi-line long text */
+  word-break: break-word !important;
+}
+
+/* Give sensible min-widths so columns don't collapse */
+#grid { table-layout: auto; }
+#grid thead th:nth-child(1), #grid tbody td:nth-child(1) { min-width: 72px; }   /* Site */
+#grid thead th:nth-child(2), #grid tbody td:nth-child(2) { min-width: 120px; }  /* Material No. */
+#grid thead th:nth-child(3), #grid tbody td:nth-child(3) { min-width: 140px; }  /* Category */
+#grid thead th:nth-child(4), #grid tbody td:nth-child(4) { min-width: 280px; }  /* Description */
+#grid thead th:nth-child(5), #grid tbody td:nth-child(5) { 
+  min-width: 720px;                 /* Long text wide */
+  max-width: none !important;
+}
+#grid thead th:nth-child(6), #grid tbody td:nth-child(6) { min-width: 110px; }  /* Status */
+
+/* Ensure horizontal scroll is allowed if width exceeds container */
+.table-wrap { overflow-x: auto; }
+
+/* Make sure Long text is never clamped/hidden */
+td[data-col="Long text"]{
+  -webkit-line-clamp: unset !important;
+  display: block !important;
+  overflow: visible !important;
+  line-height: 1.35;
+}
