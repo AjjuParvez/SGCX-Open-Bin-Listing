@@ -216,7 +216,12 @@ async function init(){
     if (page < pages){ page++; render(); }
   };
 
-  render();
+  render()
+     // Show "Welcome to SGCX-SGMM" only once per browser (until site data is cleared)
+if (!localStorage.getItem('sgcx_welcomed')) {
+  alert('Welcome to SGCX-SGMM');
+  localStorage.setItem('sgcx_welcomed', '1');
+};
 }
 
 document.addEventListener('DOMContentLoaded', init);
