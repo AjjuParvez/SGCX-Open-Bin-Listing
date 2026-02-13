@@ -170,3 +170,91 @@ td[data-col="Long text"]{
   overflow: visible !important;
   line-height: 1.35;
 }
+/* ===============================
+   EXCEL-TABLE THEME + FIXES
+   =============================== */
+
+/* 1) Keep headers on one line; wrap only body cells */
+#grid th {
+  white-space: nowrap !important;     /* stop header letters from stacking */
+  word-break: normal !important;
+  text-align: left;
+  font-weight: 700;
+}
+
+/* 2) Body cells wrap nicely (Long text shows fully) */
+#grid td {
+  white-space: pre-wrap !important;   /* preserve newlines & wrap */
+  word-break: break-word !important;  /* break long tokens */
+  vertical-align: top;                /* Excel-like top alignment */
+  line-height: 1.35;
+}
+
+/* 3) Excel gridlines + header style */
+.table-wrap { overflow-x: auto; }     /* enable horizontal scroll when needed */
+#grid {
+  table-layout: auto;                 /* allow column widths */
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  font-family: Calibri, "Segoe UI", Inter, system-ui, sans-serif; /* Excel vibe */
+}
+#grid thead th {
+  background: #d9d9d9;                /* Excel header grey */
+  color: #111827;
+  border-bottom: 1px solid #bfbfbf;
+  border-right: 1px solid #bfbfbf;
+  padding: 8px 10px;
+}
+#grid thead th:first-child { border-left: 1px solid #bfbfbf; }
+
+#grid tbody td {
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 6px 10px;                  /* denser like Excel rows */
+}
+#grid tbody tr:nth-child(even) td {
+  background: #f3f3f3;                /* alternating fill */
+}
+#grid tbody tr:hover td {
+  background: #eef6ff;                /* light hover highlight */
+}
+
+/* 4) Column widths (adjust to your taste) */
+#grid thead th:nth-child(1), #grid tbody td:nth-child(1) { min-width: 90px; }   /* Site */
+#grid thead th:nth-child(2), #grid tbody td:nth-child(2) { min-width: 140px; }  /* Material No. */
+#grid thead th:nth-child(3), #grid tbody td:nth-child(3) { min-width: 150px; }  /* Category */
+#grid thead th:nth-child(4), #grid tbody td:nth-child(4) { min-width: 280px; }  /* Description */
+#grid thead th:nth-child(5), #grid tbody td:nth-child(5) { 
+  min-width: 900px;                   /* WIDE Long text column */
+  max-width: none !important;
+}
+#grid thead th:nth-child(6), #grid tbody td:nth-child(6) { min-width: 120px; }  /* Status */
+
+/* 5) Status chips close to Excel look (keep your colors) */
+.status {
+  display:inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.status.Available { color:#065f46; background:#bbf7d0; } /* green pastel */
+.status.LowStock  { color:#7c2d12; background:#fed7aa; } /* orange pastel */
+.status.NoStock   { color:#7f1d1d; background:#fecaca; } /* red pastel */
+
+/* 6) FORCE table layout on small screens (no cards) */
+@media (max-width: 520px){
+  #grid thead { display: table-header-group !important; }
+  #grid tbody td { display: table-cell !important; }
+  #grid tbody td::before { content: none !important; }
+}
+
+/* 7) Sidebar width (optional fine-tune) */
+.content-grid { grid-template-columns: 1fr 360px; }   /* left table, right stacked bars */
+.sidebar { position: sticky; top: 86px; }
+
+/* 8) Utility bar polish */
+.utility { margin-top: 10px; }
+.search { height: 42px; }
+.search-btn { height: 42px; }
