@@ -3,11 +3,11 @@
   --sap-blue-2:#0854A0;
   --bg:#f6f7f9;
   --card:#ffffff;
-  --text:#1a1f36;
+  --text:#0f172a;
   --muted:#6b7280;
-  --ok:#1f9d55;
-  --warn:#f59e0b;
-  --bad:#ef4444;
+  --ok:#10b981;     /* green */
+  --warn:#f59e0b;   /* orange */
+  --bad:#ef4444;    /* red */
 }
 
 /* Base ------------------------------------------------*/
@@ -20,7 +20,7 @@ body{
   color:var(--text);
 }
 
-/* Subtle warehouse pattern (safe-encoded SVG) --------*/
+/* Subtle warehouse pattern ---------------------------*/
 body::before{
   content:"";
   position:fixed; inset:0; z-index:-1; opacity:.05;
@@ -42,57 +42,42 @@ body::before{
 .container{ max-width:1200px; margin:16px auto; padding:0 16px; }
 
 /* Utility bar ----------------------------------------*/
-.utility{
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-}
+.utility{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
 .utility-left{ flex:1; }
 .utility-right{ flex:0; }
 .search{
   width:100%; height:42px; padding:0 12px;
   border:1px solid #dbe1ea; border-radius:10px; background:#fff;
 }
-.chat-btn{
-  display:inline-block; padding:10px 14px; border-radius:10px;
-  background:#0f172a; color:#fff; text-decoration:none; font-weight:600;
+.search-btn{
+  height:42px; padding:0 16px; border-radius:10px;
+  border:1px solid #0f172a22; background:#0f172a; color:#fff; font-weight:700;
   box-shadow:0 2px 6px rgba(0,0,0,.15);
 }
 
-/* Content card (wraps summary + table) ---------------*/
-.content-card{
-  background:var(--card);
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(10,110,209,.05);
-  padding:14px 14px 6px;
+/* Content grid: left main + right sidebar ------------*/
+.content-grid{
+  display:grid; grid-template-columns:1fr 360px; gap:16px; align-items:start;
 }
 
-/* Summary --------------------------------------------*/
-.summary{ margin-bottom:12px; }
-.summary-title{ margin:0 0 10px; font-weight:700; color:#0f172a; }
-.summary-list{ display:grid; gap:12px; }
-.summary-row{ display:grid; grid-template-columns:110px 1fr 70px; gap:10px; align-items:center; }
-.summary-plant{ font-weight:700; color:#334155; white-space:nowrap; }
-.summary-bar{ height:14px; border-radius:999px; background:#f1f5f9; border:1px solid #e2e8f0; overflow:hidden; }
-.summary-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--ok),#22c55e); transition:width .25s ease; }
-.summary-pct{ text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
-.summary-sub{ grid-column:2 / span 2; font-size:11px; color:#64748b; }
-
-/* Meta / Pager ---------------------------------------*/
+/* Left main ------------------------------------------*/
+.main-card{
+  background:var(--card);
+  border:1px solid #e5e7eb; border-radius:12px;
+  box-shadow:0 4px 10px rgba(10,110,209,.05);
+  padding:12px;
+}
 .meta{ display:flex; justify-content:space-between; align-items:center; margin:6px 0 10px; color:#475569; }
 .pager button{ width:34px; height:34px; border-radius:8px; border:1px solid #cbd5e1; background:#fff; }
 
 /* Table ----------------------------------------------*/
-.table-wrap{
-  border:1px solid #e2e8f0; border-radius:10px; overflow:auto;
-}
-#grid{
-  width:100%; border-collapse:separate; border-spacing:0; table-layout:auto;
-}
+.table-wrap{ border:1px solid #e2e8f0; border-radius:10px; overflow:auto; }
+#grid{ width:100%; border-collapse:separate; border-spacing:0; table-layout:auto; }
 #grid thead th{
   background:#f1f5f9; position:sticky; top:0; z-index:1;
   padding:10px; font-size:13px; font-weight:700; color:#334155; border-bottom:1px solid #e2e8f0;
 }
-#grid tbody td{ padding:10px; font-size:13px; color:#0f172a; border-bottom:1px solid #f8fafc; }
+#grid tbody td{ padding:10px; font-size:13px; color:var(--text); border-bottom:1px solid #f8fafc; }
 
 /* Long text — always visible & wrapped */
 #grid td, #grid th{ white-space:pre-wrap !important; word-break:break-word !important; }
@@ -101,16 +86,45 @@ td[data-col="Long text"]{ line-height:1.35; }
 
 /* Status chips ---------------------------------------*/
 .status{ padding:4px 10px; border-radius:999px; font-weight:700; display:inline-block; }
-.status.Available{ color:var(--ok);  background:rgba(31,157,85,.12); }
+.status.Available{ color:var(--ok);  background:rgba(16,185,129,.12); }
 .status.LowStock{  color:var(--warn); background:rgba(245,158,11,.12); }
 .status.NoStock{   color:var(--bad);  background:rgba(239,68,68,.12); }
+
+/* Right sidebar (stacked bars) -----------------------*/
+.sidebar{ position:sticky; top:86px; }
+.stack-card{
+  background:var(--card); border:1px solid #e5e7eb; border-radius:12px;
+  box-shadow:0 4px 10px rgba(10,110,209,.05);
+  padding:12px;
+}
+.stack-title-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+.stack-title{ margin:0; font-size:15px; font-weight:700; color:#0f172a; }
+.stack-legend{ display:flex; gap:8px; font-size:12px; color:#334155; }
+.leg{ display:inline-flex; align-items:center; gap:6px; }
+.leg::before{ content:""; width:10px; height:10px; border-radius:2px; display:inline-block; }
+.leg-a::before{ background:var(--ok); }
+.leg-l::before{ background:var(--warn); }
+.leg-n::before{ background:var(--bad); }
+
+.stack-list{ display:grid; gap:12px; }
+.stack-row{ display:grid; grid-template-columns:64px 1fr 50px; gap:10px; align-items:center; }
+.stack-plant{ font-weight:700; color:#334155; text-align:right; }
+.stack-bar{
+  height:14px; border-radius:999px; overflow:hidden; display:flex; border:1px solid #e2e8f0; background:#f8fafc;
+}
+.seg{ height:100%; }
+.seg-a{ background:rgba(16,185,129,.95); }
+.seg-l{ background:rgba(245,158,11,.95); }
+.seg-n{ background:rgba(239,68,68,.95); }
+.stack-pct{ text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
 
 /* Footer ---------------------------------------------*/
 .app-footer{ text-align:center; color:#64748b; font-size:12px; padding:18px 0 30px; }
 
 /* Responsive -----------------------------------------*/
-@media (max-width: 860px){
-  .summary-row{ grid-template-columns:90px 1fr 60px; }
+@media (max-width: 1040px){
+  .content-grid{ grid-template-columns:1fr; }
+  .sidebar{ position:static; }
 }
 @media (max-width: 520px){
   #grid thead{ display:none; }
