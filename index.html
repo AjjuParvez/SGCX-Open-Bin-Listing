@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Open Bin Availability</title>
 
-  <!-- FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
+  <!-- Load CSS properly -->
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,28 +17,28 @@
     <div class="brand-dot"></div>
     <h1>Open Bin Availability</h1>
   </div>
-  <div class="update-info">
-    <span id="lastUpdate"></span>
-    <span id="currentDate"></span>
+
+  <!-- RIGHT‑TOP PANEL: STACKED BARS -->
+  <div class="top-summary">
+    <h2>Available % by Plant</h2>
+    <div id="summaryByPlantTop" class="stack-list"></div>
   </div>
 </header>
 
-<!-- Utility (Search left, Search button right) -->
+<!-- Search bar -->
 <div class="utility container">
   <div class="utility-left">
-    <input id="q" class="search" placeholder="Search material / desc / long text…" />
+    <input id="q" class="search" placeholder="Search material / desc / long text...">
   </div>
   <div class="utility-right">
     <button id="doSearch" class="search-btn">Search</button>
   </div>
 </div>
 
-<!-- MAIN 2‑COLUMN LAYOUT -->
+<!-- MAIN LEFT TABLE -->
 <div class="content-grid container">
 
-  <!-- LEFT SIDE (TABLE) -->
   <section class="main-card">
-
     <div class="meta">
       <span id="count">0 items</span>
       <div class="pager">
@@ -68,29 +66,11 @@
 
   </section>
 
-  <!-- RIGHT SIDE (STACKED BARS) -->
-  <aside class="sidebar">
-    <section class="stack-card">
-      <div class="stack-title-row">
-        <h2 class="stack-title">Available % by Plant</h2>
-        <div class="stack-legend">
-          <span class="leg leg-a">Available</span>
-          <span class="leg leg-l">Low</span>
-          <span class="leg leg-n">No</span>
-        </div>
-      </div>
-
-      <div id="summaryByPlant" class="stack-list"></div>
-    </section>
-  </aside>
-
 </div>
 
-<footer class="app-footer">
-  Made by Taher • Powered by GitHub Pages
-</footer>
+<footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
-<!-- JS -->
+<!-- Load Script Correctly -->
 <script src="app.js"></script>
 
 </body>
