@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open Bin Availability</title>
 
-  <!-- Fonts + CSS -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- App CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -27,31 +28,34 @@
     </div>
   </header>
 
-  <!-- Utility -->
-  <div class="utility container">
-    <input id="q" class="search" type="search" placeholder="Search material / description / long text…" />
-    <a id="chatBtn" class="chat-btn" href="#">Chat</a>
+  <!-- Utility: Search -->
+  <div class="utility">
+    <div class="utility-left">
+      <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
+    </div>
+    <div class="utility-right">
+      <a id="chatBtn" class="chat-btn" href="mailto:?subject=Open%20Bin%20Availability&body=Link:%20https://ajjuparvez.github.io/SGCX-Open-Bin-Listing/" title="Share">Share</a>
+    </div>
   </div>
 
   <main class="container">
-
     <!-- Summary -->
     <section class="summary">
       <h2 class="summary-title">Available % by Plant</h2>
       <div id="summaryByPlant" class="summary-list"></div>
     </section>
 
-    <!-- Meta + Pager -->
+    <!-- Meta / Pager -->
     <div class="meta">
       <span id="count">0 items</span>
       <div class="pager">
-        <button id="prev">◀</button>
+        <button id="prev" aria-label="Previous page">◀</button>
         <span id="page">1 / 1</span>
-        <button id="next">▶</button>
+        <button id="next" aria-label="Next page">▶</button>
       </div>
     </div>
 
-    <!-- Table -->
+    <!-- Data Table -->
     <section class="table-wrap">
       <table id="grid">
         <thead>
@@ -67,13 +71,11 @@
         <tbody></tbody>
       </table>
     </section>
-
   </main>
 
-  <footer class="app-footer">
-    Made by Taher • Powered by GitHub Pages
-  </footer>
+  <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
+  <!-- App JS -->
   <script src="app.js"></script>
 </body>
 </html>
