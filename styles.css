@@ -1,147 +1,76 @@
-:root{
-  --sap-blue:#0A6ED1;
-  --sap-blue-2:#0854A0;
-  --card:#ffffff;
-  --text:#0f172a;
-  --ok:#10b981;
-  --warn:#f59e0b;
-  --bad:#ef4444;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Bin Availability</title>
 
-/* RESET */
-*{ box-sizing:border-box; }
-body{
-  margin:0;
-  font-family:Inter,system-ui;
-  background:#eef3f9;
-  color:var(--text);
-}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
 
-/* HEADER */
-.app-header{
-  background:linear-gradient(90deg,var(--sap-blue),var(--sap-blue-2));
-  color:#fff;
-  padding:16px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-}
-.brand{ display:flex; align-items:center; gap:10px; }
-.brand-dot{ width:12px;height:12px;background:#fff;border-radius:50%; }
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-/* TOP RIGHT SUMMARY */
-.top-summary{
-  text-align:right;
-  min-width:260px;
-}
-.top-summary h2{
-  margin:0 0 8px;
-  font-size:15px;
-  font-weight:700;
-}
+<body>
+  <!-- Header with TOP-RIGHT stacked bars -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <h1>Open Bin Availability</h1>
+    </div>
 
-/* STACKED BARS */
-.stack-list{ display:flex; flex-direction:column; gap:10px; }
-.stack-row{
-  display:grid;
-  grid-template-columns:60px 1fr 50px;
-  gap:10px;
-  align-items:center;
-}
-.stack-plant{text-align:right;font-weight:700;}
-.stack-bar{
-  height:14px;
-  display:flex;
-  border-radius:10px;
-  overflow:hidden;
-  background:#e5e7eb;
-  border:1px solid #ccc;
-}
-.seg{ height:100%; }
-.seg-a{ background:#10b981; }
-.seg-l{ background:#f59e0b; }
-.seg-n{ background:#ef4444; }
-.stack-pct{text-align:right;font-weight:700;}
+    <div class="top-summary">
+      <h2>Available % by Plant</h2>
+      <div id="summaryByPlantTop" class="stack-list"></div>
+    </div>
+  </header>
 
-/* UTILITY BAR */
-.utility{
-  max-width:1200px;
-  margin:20px auto 0;
-  padding:0 20px;
-  display:flex;
-  justify-content:space-between;
-}
-.search{
-  width:100%;
-  height:42px;
-  padding:0 12px;
-  border-radius:8px;
-  border:1px solid #d1d5db;
-}
-.search-btn{
-  height:42px;
-  padding:0 16px;
-  background:#111827;
-  color:#fff;
-  border-radius:8px;
-  font-weight:600;
-}
+  <!-- Search row: input (left) + button (right, inline) -->
+  <div class="utility container">
+    <form class="search-form" onsubmit="return false;">
+      <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
+      <button id="doSearch" class="search-btn" aria-label="Search">Search</button>
+    </form>
+  </div>
 
-/* CONTENT GRID */
-.container{
-  max-width:1200px;
-  margin:0 auto;
-}
-.content-grid{
-  display:block;
-}
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <section class="main-card">
+      <!-- Pager / meta -->
+      <div class="meta">
+        <span id="count">0 items</span>
+        <div class="pager">
+          <button id="prev" aria-label="Previous page">◀</button>
+          <span id="page">1 / 1</span>
+          <button id="next" aria-label="Next page">▶</button>
+        </div>
+      </div>
 
-/* EXCEL TABLE STYLING */
-.table-wrap{
-  margin-top:20px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  overflow-x:auto;
-  background:white;
-}
-#grid{
-  width:100%;
-  border-collapse:separate;
-  border-spacing:0;
-}
-#grid th{
-  background:#d9d9d9;
-  padding:10px;
-  border-bottom:1px solid #c0c0c0;
-  white-space:nowrap !important;
-}
-#grid td{
-  padding:8px;
-  border-bottom:1px solid #e5e5e5;
-  white-space:pre-wrap !important;
-  word-break:break-word !important;
-}
+      <!-- Table -->
+      <div class="table-wrap">
+        <table id="grid">
+          <thead>
+            <tr>
+              <th>Site</th>
+              <th>Status</th>          <!-- moved next to Site -->
+              <th>Material No.</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Long text</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
-/* FIX COLUMN WIDTHS */
-#grid th:nth-child(1), #grid td:nth-child(1){ min-width:80px; }
-#grid th:nth-child(2), #grid td:nth-child(2){ min-width:150px; }
-#grid th:nth-child(3), #grid td:nth-child(3){ min-width:140px; }
-#grid th:nth-child(4), #grid td:nth-child(4){ min-width:280px; }
-#grid th:nth-child(5), #grid td:nth-child(5){ min-width:800px; max-width:none; }
-#grid th:nth-child(6), #grid td:nth-child(6){ min-width:120px; }
+  <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
-/* STATUS BADGES */
-.status{
-  padding:4px 10px;
-  border-radius:10px;
-  font-weight:700;
-}
-.status.Available{ background:#bbf7d0; color:#065f46; }
-.status.LowStock{ background:#fed7aa; color:#92400e;}
-.status.NoStock{ background:#fecaca; color:#7f1d1d; }
-
-.app-footer{
-  text-align:center;
-  padding:20px;
-  color:#6b7280;
-}
+  <!-- App JS -->
+  <script src="app.js"></script>
+</body>
+</html>
