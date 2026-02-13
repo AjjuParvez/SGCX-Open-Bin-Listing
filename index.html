@@ -5,73 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open Bin Availability</title>
 
-  <!-- Fonts -->
+  <!-- Fonts + CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-<header class="app-header">
-  <div class="brand">
-    <div class="brand-dot"></div>
-    <h1>Open Bin Availability</h1>
-  </div>
-
-  <div class="update-info">
-    <span id="lastUpdate"></span>
-    <span id="currentDate"></span>
-  </div>
-</header>
-
-<main class="container">
-
-  <!-- Search only -->
-  <section class="filters">
-    <div class="filter">
-      <label>Search</label>
-      <input id="q" placeholder="Search material / desc / long text..." />
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <h1>Open Bin Availability</h1>
     </div>
-  </section>
+    <div class="update-info">
+      <span id="lastUpdate"></span>
+      <span id="currentDate"></span>
+    </div>
+  </header>
 
-  <!-- Summary -->
-  <section class="summary">
-    <h2 class="summary-title">Available % by Plant</h2>
-    <div id="summaryByPlant" class="summary-list"></div>
-  </section>
-
-  <!-- Meta -->
-  <div class="meta">
-    <span id="count">0 items</span>
-    <div class="pager">
-      <button id="prev">◀</button>
-      <span id="page">1 / 1</span>
-      <button id="next">▶</button>
+  <!-- Utility Bar: Search (left) + Chat (right) -->
+  <div class="utility">
+    <div class="utility-left">
+      <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
+    </div>
+    <div class="utility-right">
+      <!-- Opens email compose with current page link -->
+      <a id="chatBtn" class="chat-btn" href="#" title="Chat / Help">Chat</a>
     </div>
   </div>
 
-  <!-- Table -->
-  <section class="table-wrap">
-    <table id="grid">
-      <thead>
-        <tr>
-          <th>Site</th>
-          <th>Material No.</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Long text</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
+  <main class="container">
 
-</main>
+    <!-- Summary -->
+    <section class="summary">
+      <h2 class="summary-title">Available % by Plant</h2>
+      <div id="summaryByPlant" class="summary-list"></div>
+    </section>
 
-<footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
+    <!-- Meta / Pager -->
+    <div class="meta">
+      <span id="count">0 items</span>
+      <div class="pager">
+        <button id="prev" aria-label="Previous page">◀</button>
+        <span id="page">1 / 1</span>
+        <button id="next" aria-label="Next page">▶</button>
+      </div>
+    </div>
 
-<script src="app.js"></script>
+    <!-- Data Table -->
+    <section class="table-wrap">
+      <table id="grid">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Material No.</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Long text</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
