@@ -3,16 +3,24 @@ let ALL = [];
 let filtered = [];
 let page = 1;
 
-/* ---------- Robust CSV parser (glues overflow into Long text) ---------- */
+/* ---------- Robust CSV parser: glue overflow into last column (Long text) ---------- */
 function parseCSV(csv){
   const rows = [];
   let row = [], cell = "", q = false;
 
   for (let i = 0; i < csv.length; i++){
     const c = csv[i];
-    if (c === '"'){ if (q && csv[i+1] === '"'){ cell += '"'; i++; } else { q = !q; } continue; }
-    if (c === ',' && !q){ row.push(cell); cell=""; continue; }
-    if ((c === '\n' || c === '\r') && !q){ if (row.length || cell){ row.push(cell); rows.push(row); } row=[]; cell=""; continue; }
+
+    if (c === '"'){
+      if (q && csv[i+1] === '"'){ cell += '"'; i++; }
+      else { q = !q; }
+      continue;
+    }
+    if (c === ',' && !q){ row.push(cell); cell = ""; continue; }
+    if ((c === '\n' || c === '\r') && !q){
+      if (row.length || cell){ row.push(cell); rows.push(row); }
+      row = []; cell = ""; continue;
+    }
     cell += c;
   }
   if (row.length || cell){ row.push(cell); rows.push(row); }
@@ -33,13 +41,12 @@ function parseCSV(csv){
   });
 }
 
-/* ---------- Loader ---------- */
 async function loadCSV(path){
   const res = await fetch(path);
   return parseCSV(await res.text());
 }
 
-/* ---------- Header-pick helper ---------- */
+/* ---------- Pick helper (header variations) ---------- */
 function pick(obj, candidates){
   const keys = Object.keys(obj);
   for (const want of candidates){
@@ -81,7 +88,7 @@ function applyFilters(){
   render();
 }
 
-/* ---------- Summary ---------- */
+/* ---------- Stacked bar summary (right sidebar) ---------- */
 function summarizeByPlant(rows){
   const map = {};
   rows.forEach(r=>{
@@ -92,28 +99,37 @@ function summarizeByPlant(rows){
     else if (st === 'Low Stock') map[r.site].L++;
     else if (st === 'No Stock')  map[r.site].N++;
   });
+
+  // return sites with segment widths
   return Object.entries(map).map(([site,v])=>{
-    const total = v.A + v.L + v.N;
-    const pct = total ? (v.A/total)*100 : 0;
-    return {site, ...v, total, pct};
-  }).sort((a,b)=> b.pct - a.pct || a.site.localeCompare(b.site));
+    const t = v.A + v.L + v.N;
+    const aPct = t ? (v.A/t)*100 : 0;
+    const lPct = t ? (v.L/t)*100 : 0;
+    const nPct = t ? (v.N/t)*100 : 0;
+    return { site, ...v, total:t, aPct, lPct, nPct };
+  }).sort((a,b)=> b.aPct - a.aPct || a.site.localeCompare(b.site));
 }
+
 function renderSummary(rows){
   const wrap = document.getElementById('summaryByPlant');
   const data = summarizeByPlant(rows);
-  wrap.innerHTML = data.map(d=>`
-    <div class="summary-row">
-      <div class="summary-plant">${d.site}</div>
-      <div class="summary-bar"><div class="summary-fill" style="width:${d.pct.toFixed(1)}%"></div></div>
-      <div class="summary-pct">${d.pct.toFixed(1)}%</div>
-      <div class="summary-sub">
-        <span class="a">A:${d.A}</span> | <span class="l">L:${d.L}</span> | <span class="n">N:${d.N}</span> &nbsp; Total: ${d.total}
+  wrap.innerHTML = data.map(d=>{
+    const a = d.aPct.toFixed(1), l = d.lPct.toFixed(1), n = d.nPct.toFixed(1);
+    return `
+      <div class="stack-row" title="${d.site}: A ${a}% • L ${l}% • N ${n}% (Total ${d.total})">
+        <div class="stack-plant">${d.site}</div>
+        <div class="stack-bar">
+          <span class="seg seg-a" style="width:${a}%"></span>
+          <span class="seg seg-l" style="width:${l}%"></span>
+          <span class="seg seg-n" style="width:${n}%"></span>
+        </div>
+        <div class="stack-pct">${a}%</div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-/* ---------- Table ---------- */
+/* ---------- Table render ---------- */
 function render(){
   const tbody = document.querySelector('#grid tbody');
   const start = (page-1)*PAGE_SIZE;
@@ -139,29 +155,17 @@ function render(){
   renderSummary(filtered);
 }
 
-/* ---------- Timestamps + Chat ---------- */
+/* ---------- Timestamps ---------- */
 function updateTimestamps(){
   document.getElementById('lastUpdate').textContent = 'Last Update: ' + new Date().toLocaleString();
   setInterval(()=>{ document.getElementById('currentDate').textContent = 'Now: ' + new Date().toLocaleString(); }, 1000);
-
-  const chat = document.getElementById('chatBtn');
-  if (chat){
-    chat.addEventListener('click', e=>{
-      e.preventDefault();
-      const q = document.getElementById('q').value || '';
-      const body = encodeURIComponent(
-        `Hi,\n\nI need help on the Open Bin page:\nURL: ${location.href}\nSearch: ${q}\n\nThanks,\n`
-      );
-      location.href = `mailto:?subject=Open%20Bin%20Support&body=${body}`;
-    });
-  }
 }
 
 /* ---------- INIT ---------- */
 async function init(){
   const raw = await loadCSV('stock.csv');
 
-  // Normalize headers and expand multi-site rows
+  // Normalize headers and expand multi-plant rows
   let expanded = [];
   raw.forEach(r=>{
     const site   = pick(r, ['Site Location','Site']);
@@ -187,9 +191,16 @@ async function init(){
   ALL = expanded;
   filtered = expanded;
 
+  // Search actions
   document.getElementById('q').addEventListener('input', applyFilters);
+  document.getElementById('doSearch').addEventListener('click', applyFilters);
+
+  // Pager
   document.getElementById('prev').onclick = ()=>{ if(page>1){ page--; render(); } };
-  document.getElementById('next').onclick = ()=>{ const pages = Math.ceil(filtered.length/PAGE_SIZE); if(page<pages){ page++; render(); } };
+  document.getElementById('next').onclick = ()=>{
+    const pages = Math.ceil(filtered.length / PAGE_SIZE);
+    if(page < pages){ page++; render(); }
+  };
 
   render();
   updateTimestamps();
