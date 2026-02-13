@@ -5,88 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open Bin Availability</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap
+  styles.css
 </head>
-<body>
-  <!-- Header -->
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-dot"></div>
-      <h1>Open Bin Availability</h1>
-    </div>
-    <div class="update-info">
-      <span id="lastUpdate"></span>
-      <span id="currentDate"></span>
-    </div>
-  </header>
 
-  <!-- Utility bar: Search (left) + Search button (right) -->
-  <div class="utility container">
-    <div class="utility-left">
-      <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
-    </div>
-    <div class="utility-right">
-      <button id="doSearch" class="search-btn" aria-label="Search">Search</button>
-    </div>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <h1>Open Bin Availability</h1>
   </div>
 
-  <!-- Main grid: left = table, right = stacked summary -->
-  <div class="content-grid container">
-    <!-- LEFT: main content -->
-    <section class="main-card">
-      <!-- Meta / Pager -->
-      <div class="meta">
-        <span id="count">0 items</span>
-        <div class="pager">
-          <button id="prev" aria-label="Previous page">◀</button>
-          <span id="page">1 / 1</span>
-          <button id="next" aria-label="Next page">▶</button>
+  <div class="update-info">
+    <span id="lastUpdate"></span>
+    <span id="currentDate"></span>
+  </div>
+</header>
+
+<!-- Utility Row -->
+<div class="utility container">
+  <div class="utility-left">
+    <input id="q" class="search" placeholder="Search material / desc / long text..."/>
+  </div>
+  <div class="utility-right">
+    <button id="doSearch" class="search-btn">Search</button>
+  </div>
+</div>
+
+<!-- MAIN GRID (Left = Table / Right = Stacked bars) -->
+<div class="content-grid container">
+
+  <!-- LEFT SIDE -->
+  <section class="main-card">
+
+    <div class="meta">
+      <span id="count">0 items</span>
+      <div class="pager">
+        <button id="prev">◀</button>
+        <span id="page">1 / 1</span>
+        <button id="next">▶</button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <table id="grid">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Material No.</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Long text</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RIGHT SIDE STACKED BARS -->
+  <aside class="sidebar">
+    <section class="stack-card">
+      <div class="stack-title-row">
+        <h2 class="stack-title">Available % by Plant</h2>
+        <div class="stack-legend">
+          <span class="leg leg-a">Available</span>
+          <span class="leg leg-l">Low</span>
+          <span class="leg leg-n">No</span>
         </div>
       </div>
-
-      <!-- Data Table -->
-      <section class="table-wrap">
-        <table id="grid">
-          <thead>
-            <tr>
-              <th>Site</th>
-              <th>Material No.</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Long text</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
+      <div id="summaryByPlant" class="stack-list"></div>
     </section>
+  </aside>
 
-    <!-- RIGHT: stacked bars -->
-    <aside class="sidebar">
-      <section class="stack-card">
-        <div class="stack-title-row">
-          <h2 class="stack-title">Available % by Plant</h2>
-          <div class="stack-legend">
-            <span class="leg leg-a">Available</span>
-            <span class="leg leg-l">Low</span>
-            <span class="leg leg-n">No</span>
-          </div>
-        </div>
-        <div id="summaryByPlant" class="stack-list"></div>
-      </section>
-    </aside>
-  </div>
+</div>
 
-  <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
+<footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
-  <!-- App -->
-  <script src="app.js"></script>
+app.js</script>
 </body>
 </html>
