@@ -6,9 +6,9 @@
   <title>Open Bin Availability</title>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
@@ -26,25 +26,20 @@
     </div>
   </header>
 
-  <!-- Utility bar: Search (left) + Chat (right) -->
+  <!-- Utility bar: Search (left) + Search button (right) -->
   <div class="utility container">
     <div class="utility-left">
       <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
     </div>
     <div class="utility-right">
-      <a id="chatBtn" class="chat-btn" href="#" aria-label="Open help chat">Chat</a>
+      <button id="doSearch" class="search-btn" aria-label="Search">Search</button>
     </div>
   </div>
 
-  <!-- Main content card (summary + table) -->
-  <main class="container">
-    <section class="content-card">
-      <!-- Summary -->
-      <section class="summary">
-        <h2 class="summary-title">Available % by Plant</h2>
-        <div id="summaryByPlant" class="summary-list"></div>
-      </section>
-
+  <!-- Main grid: left = table, right = stacked summary -->
+  <div class="content-grid container">
+    <!-- LEFT: main content -->
+    <section class="main-card">
       <!-- Meta / Pager -->
       <div class="meta">
         <span id="count">0 items</span>
@@ -72,7 +67,22 @@
         </table>
       </section>
     </section>
-  </main>
+
+    <!-- RIGHT: stacked bars -->
+    <aside class="sidebar">
+      <section class="stack-card">
+        <div class="stack-title-row">
+          <h2 class="stack-title">Available % by Plant</h2>
+          <div class="stack-legend">
+            <span class="leg leg-a">Available</span>
+            <span class="leg leg-l">Low</span>
+            <span class="leg leg-n">No</span>
+          </div>
+        </div>
+        <div id="summaryByPlant" class="stack-list"></div>
+      </section>
+    </aside>
+  </div>
 
   <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
