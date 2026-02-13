@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open Bin Availability</title>
 
-  <!-- Fonts + CSS -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <!-- Header -->
   <header class="app-header">
@@ -18,42 +20,38 @@
       <div class="brand-dot"></div>
       <h1>Open Bin Availability</h1>
     </div>
+
     <div class="update-info">
       <span id="lastUpdate"></span>
       <span id="currentDate"></span>
     </div>
   </header>
 
-  <!-- Utility Bar: Search (left) + Chat (right) -->
-  <div class="utility">
-    <div class="utility-left">
-      <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
-    </div>
-    <div class="utility-right">
-      <!-- Opens email compose with current page link -->
-      <a id="chatBtn" class="chat-btn" href="#" title="Chat / Help">Chat</a>
-    </div>
+  <!-- Utility: Search + Help -->
+  <div class="utility container">
+    <input id="q" class="search" type="search" placeholder="Search material / description / long text…" />
+    <a id="chatBtn" class="chat-btn" href="#">Chat</a>
   </div>
 
   <main class="container">
 
-    <!-- Summary -->
+    <!-- Summary Section -->
     <section class="summary">
       <h2 class="summary-title">Available % by Plant</h2>
       <div id="summaryByPlant" class="summary-list"></div>
-    </section>
+   section>
 
-    <!-- Meta / Pager -->
+    <!-- Meta + Pagination -->
     <div class="meta">
       <span id="count">0 items</span>
       <div class="pager">
-        <button id="prev" aria-label="Previous page">◀</button>
+        <button id="prev">◀</button>
         <span id="page">1 / 1</span>
-        <button id="next" aria-label="Next page">▶</button>
+        <button id="next">▶</button>
       </div>
     </div>
 
-    <!-- Data Table -->
+    <!-- Table -->
     <section class="table-wrap">
       <table id="grid">
         <thead>
@@ -72,8 +70,11 @@
 
   </main>
 
-  <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
+  <footer class="app-footer">
+    Made by Taher • Powered by GitHub Pages
+  </footer>
 
   <script src="app.js"></script>
 </body>
 </html>
+``
