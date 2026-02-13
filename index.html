@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open Bin Availability</title>
 
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap
-  styles.css
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
+<!-- Header -->
 <header class="app-header">
   <div class="brand">
     <div class="brand-dot"></div>
@@ -25,22 +29,23 @@
   </div>
 </header>
 
-<!-- Utility Row -->
+<!-- Utility Bar (Search Left, Button Right) -->
 <div class="utility container">
   <div class="utility-left">
-    <input id="q" class="search" placeholder="Search material / desc / long text..."/>
+    <input id="q" class="search" placeholder="Search material / desc / long text..." />
   </div>
   <div class="utility-right">
     <button id="doSearch" class="search-btn">Search</button>
   </div>
 </div>
 
-<!-- MAIN GRID (Left = Table / Right = Stacked bars) -->
+<!-- MAIN GRID: LEFT = TABLE, RIGHT = STACKED SUMMARY -->
 <div class="content-grid container">
 
-  <!-- LEFT SIDE -->
+  <!-- LEFT SIDE: TABLE -->
   <section class="main-card">
 
+    <!-- Meta / Pager -->
     <div class="meta">
       <span id="count">0 items</span>
       <div class="pager">
@@ -66,11 +71,13 @@
         <tbody></tbody>
       </table>
     </div>
+
   </section>
 
-  <!-- RIGHT SIDE STACKED BARS -->
+  <!-- RIGHT SIDE: STACKED BARS -->
   <aside class="sidebar">
     <section class="stack-card">
+
       <div class="stack-title-row">
         <h2 class="stack-title">Available % by Plant</h2>
         <div class="stack-legend">
@@ -79,7 +86,9 @@
           <span class="leg leg-n">No</span>
         </div>
       </div>
+
       <div id="summaryByPlant" class="stack-list"></div>
+
     </section>
   </aside>
 
@@ -87,6 +96,7 @@
 
 <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
-app.js</script>
+<!-- App Logic -->
+<script src="app.js"></script>
 </body>
 </html>
