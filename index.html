@@ -10,10 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- App CSS -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
   <!-- Header -->
   <header class="app-header">
@@ -21,62 +20,63 @@
       <div class="brand-dot"></div>
       <h1>Open Bin Availability</h1>
     </div>
-
     <div class="update-info">
       <span id="lastUpdate"></span>
       <span id="currentDate"></span>
     </div>
   </header>
 
-  <!-- Utility: Search -->
-  <div class="utility">
+  <!-- Utility bar: Search (left) + Chat (right) -->
+  <div class="utility container">
     <div class="utility-left">
       <input id="q" class="search" type="search" placeholder="Search material / desc / long text…" />
     </div>
     <div class="utility-right">
-      <a id="chatBtn" class="chat-btn" href="mailto:?subject=Open%20Bin%20Availability&body=Link:%20https://ajjuparvez.github.io/SGCX-Open-Bin-Listing/" title="Share">Share</a>
+      <a id="chatBtn" class="chat-btn" href="#" aria-label="Open help chat">Chat</a>
     </div>
   </div>
 
+  <!-- Main content card (summary + table) -->
   <main class="container">
-    <!-- Summary -->
-    <section class="summary">
-      <h2 class="summary-title">Available % by Plant</h2>
-      <div id="summaryByPlant" class="summary-list"></div>
-    </section>
+    <section class="content-card">
+      <!-- Summary -->
+      <section class="summary">
+        <h2 class="summary-title">Available % by Plant</h2>
+        <div id="summaryByPlant" class="summary-list"></div>
+      </section>
 
-    <!-- Meta / Pager -->
-    <div class="meta">
-      <span id="count">0 items</span>
-      <div class="pager">
-        <button id="prev" aria-label="Previous page">◀</button>
-        <span id="page">1 / 1</span>
-        <button id="next" aria-label="Next page">▶</button>
+      <!-- Meta / Pager -->
+      <div class="meta">
+        <span id="count">0 items</span>
+        <div class="pager">
+          <button id="prev" aria-label="Previous page">◀</button>
+          <span id="page">1 / 1</span>
+          <button id="next" aria-label="Next page">▶</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Data Table -->
-    <section class="table-wrap">
-      <table id="grid">
-        <thead>
-          <tr>
-            <th>Site</th>
-            <th>Material No.</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Long text</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <!-- Data Table -->
+      <section class="table-wrap">
+        <table id="grid">
+          <thead>
+            <tr>
+              <th>Site</th>
+              <th>Material No.</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Long text</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
     </section>
   </main>
 
   <footer class="app-footer">Made by Taher • Powered by GitHub Pages</footer>
 
-  <!-- App JS -->
+  <!-- App -->
   <script src="app.js"></script>
 </body>
 </html>
-``
